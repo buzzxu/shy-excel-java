@@ -1,2 +1,1 @@
 ### shy-excel-java
-[![Publish package to the Maven Central Repository and GitHub Packages](https://github.com/buzzxu/shy-excel-java/actions/workflows/release.yml/badge.svg)](https://github.com/buzzxu/shy-excel-java/actions/workflows/release.yml)
