@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
  * @author xux
- * @date 2023年10月13日 23:17:50
+ *  2023年10月13日 23:17:50
  */
 public enum DataType {
     INDEX("index"),

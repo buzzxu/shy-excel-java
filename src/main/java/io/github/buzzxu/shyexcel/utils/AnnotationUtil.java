@@ -12,7 +12,7 @@ import java.util.List;
 
 /**
  * @author xux
- * @date 2023年10月16日 12:57:05
+ *  2023年10月16日 12:57:05
  */
 public class AnnotationUtil {
 

@@ -12,7 +12,7 @@ import java.text.SimpleDateFormat;
 
 /**
  * @author xux
- * @date 2023年10月15日 22:03:58
+ *  2023年10月15日 22:03:58
  */
 enum MsgPack {
     INSTANCE;

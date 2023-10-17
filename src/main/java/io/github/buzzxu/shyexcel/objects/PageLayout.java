@@ -4,7 +4,7 @@ import lombok.*;
 
 /**
  * @author xux
- * @date 2023年10月13日 23:09:03
+ *  2023年10月13日 23:09:03
  */
 @Getter @Setter @AllArgsConstructor @NoArgsConstructor @Builder
 public class PageLayout {
