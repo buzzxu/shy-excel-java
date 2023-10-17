@@ -6,6 +6,7 @@
   <artifactId>shy-excel-java</artifactId>
   <version>0.0.1</version>
   <packaging>jar</packaging>
+  <description>This project provides a Java library for creating simple Excel spreadsheets.The data can then be read by WebAssembly in the browser</description>
 
   <name>shy-excel-java</name>
   <url>http://maven.apache.org</url>
