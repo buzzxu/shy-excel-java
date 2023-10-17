@@ -18,7 +18,7 @@ import java.util.List;
  * @author xux
  *  2023年10月13日 22:20:38
  */
-public class $ {
+public class ShyExcel {
 
     public static <T> void write(List<T> data, Class<T> clazz, HttpServletResponse response, DataFormat format) throws ShyExcelException {
         byte[] bytes = toBytes(data, clazz, format);

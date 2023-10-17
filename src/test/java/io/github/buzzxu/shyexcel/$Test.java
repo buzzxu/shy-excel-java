@@ -51,6 +51,6 @@ public class $Test {
 
     @Test
     public void toFile() throws ShyExcelException {
-        $.toFile("test1.json",orders,Order.class, DataFormat.JSON);
+        ShyExcel.toFile("test1.json",orders,Order.class, DataFormat.JSON);
     }
 }
