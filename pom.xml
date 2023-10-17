@@ -16,6 +16,24 @@
     <maven.compiler.target>17</maven.compiler.target>
     <lombok.version>1.18.30</lombok.version>
   </properties>
+  <licenses>
+    <license>
+      <name>GNU General Public License v3.0</name>
+      <url>https://www.gnu.org/licenses/gpl-3.0.en.html</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+
+  <developers>
+    <developer>
+      <id>xuxiang</id>
+      <name>Xu Xiang</name>
+      <email>xiang.leau@gmail.com</email>
+      <roles>
+        <role>developer</role>
+      </roles>
+    </developer>
+  </developers>
   <distributionManagement>
     <snapshotRepository>
       <id>ossrh</id>
