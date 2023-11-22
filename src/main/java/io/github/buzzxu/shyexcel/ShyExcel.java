@@ -91,7 +91,6 @@ public class ShyExcel {
         try {
             response.addHeader("Content-Encoding", "gzip");
             ServletOutputStream out = response.getOutputStream();
-            out.write(bytes);
             GZIPOutputStream gzipOut = new GZIPOutputStream(out);
             gzipOut.write(bytes);
             gzipOut.close();
