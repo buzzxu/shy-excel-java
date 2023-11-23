@@ -89,11 +89,9 @@ public class ShyExcel {
         return table;
     }
     public static void gzip(byte[] bytes, HttpServletResponse response) throws ShyExcelException {
-        try {
-            response.addHeader("Content-Encoding", "gzip");
-            try (OutputStream out = new GZIPOutputStream(response.getOutputStream())) {
-                out.write(bytes);
-            }
+        response.addHeader("Content-Encoding", "gzip");
+        try (ServletOutputStream out = response.getOutputStream(); GZIPOutputStream gzip = new GZIPOutputStream(out)){
+            gzip.write(bytes);
         }catch (Exception ex){
             throw new ShyExcelException(ex);
         }
