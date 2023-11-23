@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.ByteArrayOutputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.lang.reflect.Field;
-import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.zip.GZIPOutputStream;
 
@@ -22,7 +22,7 @@ import java.util.zip.GZIPOutputStream;
  */
 public class ShyExcel {
 
-    public static <T> void compress(List<T> data, Class<T> clazz, HttpServletResponse response, DataFormat format) throws ShyExcelException {
+    public static <T> void compress(List<T> data, Class<T> clazz, DataFormat format, HttpServletResponse response) throws ShyExcelException {
         try {
             byte[] bytes = toBytes(data, clazz, format);
             gzip(bytes,response);
@@ -31,9 +31,10 @@ public class ShyExcel {
         }
 
     }
+
     public static <T> void compress(List<T> data, Class<T> clazz, HttpServletResponse response) throws ShyExcelException {
         try {
-            gzip(toJson(data,clazz).getBytes(StandardCharsets.UTF_8),response);
+            gzip(toBytes(data,clazz,DataFormat.JSON),response);
         }catch (Exception ex){
             throw new ShyExcelException(ex);
         }
@@ -87,18 +88,16 @@ public class ShyExcel {
         table.setSheets(List.of(toSheet(data,clazz)));
         return table;
     }
-    public static <T> void gzip(byte[] bytes, HttpServletResponse response) throws ShyExcelException {
+    public static void gzip(byte[] bytes, HttpServletResponse response) throws ShyExcelException {
         try {
             response.addHeader("Content-Encoding", "gzip");
-            ServletOutputStream out = response.getOutputStream();
-            GZIPOutputStream gzipOut = new GZIPOutputStream(out);
-            gzipOut.write(bytes);
-            gzipOut.close();
+            try (OutputStream out = new GZIPOutputStream(response.getOutputStream())) {
+                out.write(bytes);
+            }
         }catch (Exception ex){
             throw new ShyExcelException(ex);
         }
     }
-
 
     private static <T> Sheet toSheet(List<T> data, Class<T> clazz){
         Sheet<T> sheet = new Sheet<T>();
