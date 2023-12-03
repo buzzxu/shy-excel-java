@@ -22,24 +22,9 @@ import java.util.zip.GZIPOutputStream;
  */
 public class ShyExcel {
 
-    public static <T> void compress(List<T> data, Class<T> clazz, DataFormat format, HttpServletResponse response) throws ShyExcelException {
-        try {
-            byte[] bytes = toBytes(data, clazz, format);
-            gzip(bytes,response);
-        }catch (Exception ex){
-            throw new ShyExcelException(ex);
-        }
-
+    public static <T> void write(List<T> data, Class<T> clazz, HttpServletResponse response) throws ShyExcelException {
+       write(data,clazz,response,DataFormat.MESSAGEPACK);
     }
-
-    public static <T> void compress(List<T> data, Class<T> clazz, HttpServletResponse response) throws ShyExcelException {
-        try {
-            gzip(toBytes(data,clazz,DataFormat.JSON),response);
-        }catch (Exception ex){
-            throw new ShyExcelException(ex);
-        }
-    }
-
 
     public static <T> void write(List<T> data, Class<T> clazz, HttpServletResponse response, DataFormat format) throws ShyExcelException {
         try {
@@ -51,7 +36,6 @@ public class ShyExcel {
         }catch (Exception ex){
             throw new ShyExcelException(ex);
         }
-
     }
 
 
@@ -69,6 +53,23 @@ public class ShyExcel {
         return toBytes(table,format);
     }
 
+    public static <T> void compress(List<T> data, Class<T> clazz, HttpServletResponse response) throws ShyExcelException {
+        try {
+            gzip(toBytes(data,clazz,DataFormat.JSON),response);
+        }catch (Exception ex){
+            throw new ShyExcelException(ex);
+        }
+    }
+    public static void gzip(byte[] bytes, HttpServletResponse response) throws ShyExcelException {
+        response.addHeader("Content-Encoding", "gzip");
+        try (ServletOutputStream out = response.getOutputStream(); GZIPOutputStream gzip = new GZIPOutputStream(out)){
+            gzip.write(bytes);
+        }catch (Exception ex){
+            throw new ShyExcelException(ex);
+        }
+    }
+
+
     public static <T> String toJson(List<T> data,Class<T> clazz) throws ShyExcelException {
         Table table = to(data,clazz);
         try {
@@ -77,6 +78,7 @@ public class ShyExcel {
             throw new ShyExcelException(e);
         }
     }
+
     public static <T> Table to(List<T> data,Class<T> clazz){
         if(data == null){
             throw new IllegalArgumentException("data is null");
@@ -87,14 +89,6 @@ public class ShyExcel {
         Table table = new Table();
         table.setSheets(List.of(toSheet(data,clazz)));
         return table;
-    }
-    public static void gzip(byte[] bytes, HttpServletResponse response) throws ShyExcelException {
-        response.addHeader("Content-Encoding", "gzip");
-        try (ServletOutputStream out = response.getOutputStream(); GZIPOutputStream gzip = new GZIPOutputStream(out)){
-            gzip.write(bytes);
-        }catch (Exception ex){
-            throw new ShyExcelException(ex);
-        }
     }
 
     private static <T> Sheet toSheet(List<T> data, Class<T> clazz){

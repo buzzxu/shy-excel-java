@@ -5,8 +5,8 @@ package io.github.buzzxu.shyexcel.objects;
  *  2023年10月14日 23:44:36
  */
 public enum DataFormat {
-    JSON("application/msgpack"),
-    MESSAGEPACK("application/msgpack"),
+    JSON("application/json"),
+    MESSAGEPACK("application/x-msgpack"),
     PROTOBUF("application/x-protobuf"),
     ;
 

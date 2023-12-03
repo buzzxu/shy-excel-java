@@ -16,13 +16,14 @@ import java.lang.annotation.Target;
 public @interface Column {
     String title();
 
+
     DataType type() default DataType.STRING;
 
     boolean merge() default false;
 
     Font font() default @Font;
 
-    float width()default 0f;
+    float width() default 0f;
 
-    boolean collection()default false;
+    boolean collection() default false;
 }
