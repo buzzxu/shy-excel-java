@@ -11,9 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.ByteArrayOutputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.lang.reflect.Field;
 import java.util.List;
+import java.util.stream.Stream;
 import java.util.zip.GZIPOutputStream;
 
 /**
@@ -89,6 +89,10 @@ public class ShyExcel {
         Table table = new Table();
         table.setSheets(List.of(toSheet(data,clazz)));
         return table;
+    }
+
+    public static <T> Stream<Table> stream(List<T> data, Class<T> clazz){
+        return Stream.of(to(data,clazz));
     }
 
     private static <T> Sheet toSheet(List<T> data, Class<T> clazz){
