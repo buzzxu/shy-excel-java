@@ -1,6 +1,6 @@
 package io.github.buzzxu.shyexcel.data;
 
-import io.github.buzzxu.shyexcel.annotation.Column;
+import io.github.buzzxu.shyexcel.annotation.ExcelCol;
 import io.github.buzzxu.shyexcel.annotation.Header;
 import io.github.buzzxu.shyexcel.annotation.Sheet;
 import io.github.buzzxu.shyexcel.objects.DataType;
@@ -19,16 +19,16 @@ import java.util.List;
 @Setter @Builder
 @Sheet(name = "订单",header = @Header(title = "订单列表"))
 public class Order {
-    @Column(title = "序号",type = DataType.INDEX)
+    @ExcelCol(title = "序号",type = DataType.INDEX)
     private Integer index;
-    @Column(title = "订单编号",merge = true)
+    @ExcelCol(title = "订单编号",merge = true)
     private String orderNumber;
-    @Column(title = "门店编号",merge = true)
+    @ExcelCol(title = "门店编号",merge = true)
     private String shopCode;
-    @Column(title = "总金额",merge = true)
+    @ExcelCol(title = "总金额",merge = true)
     private BigDecimal amount;
-    @Column(title = "收货地址",merge = true)
+    @ExcelCol(title = "收货地址",merge = true)
     private String address;
-    @Column(title = "订单明细",collection = true)
+    @ExcelCol(title = "订单明细",collection = true)
     private List<OrderItem> items;
 }

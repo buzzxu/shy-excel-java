@@ -1,6 +1,6 @@
 package io.github.buzzxu.shyexcel.utils;
 
-import io.github.buzzxu.shyexcel.annotation.Column;
+import io.github.buzzxu.shyexcel.annotation.ExcelCol;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
@@ -18,7 +18,7 @@ public class AnnotationUtil {
 
     public static List<Field> getAnnotatedFields(Class<?> clazz) {
         return Arrays.stream(clazz.getDeclaredFields())
-                .filter(field -> field.getAnnotation(Column.class) != null)
+                .filter(field -> field.getAnnotation(ExcelCol.class) != null)
                 .toList();
     }
 
