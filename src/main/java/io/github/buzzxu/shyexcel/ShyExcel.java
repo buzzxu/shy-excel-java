@@ -1,6 +1,7 @@
 package io.github.buzzxu.shyexcel;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import io.github.buzzxu.shyexcel.annotation.ExcelCol;
 import io.github.buzzxu.shyexcel.exceptions.ShyExcelException;
 import io.github.buzzxu.shyexcel.objects.*;
 import io.github.buzzxu.shyexcel.utils.Strings;
@@ -160,7 +161,7 @@ public class ShyExcel {
 
     private static Column toColumn(Field field){
         Column column = new Column();
-        io.github.buzzxu.shyexcel.annotation.Column $column = field.getAnnotation(io.github.buzzxu.shyexcel.annotation.Column.class);
+        ExcelCol $column = field.getAnnotation(ExcelCol.class);
         if(Strings.isNullOrEmpty($column.title())){
             throw new IllegalArgumentException("field `%s` title is null".formatted(field.getName()));
         }
