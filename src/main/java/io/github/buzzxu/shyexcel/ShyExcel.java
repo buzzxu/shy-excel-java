@@ -174,10 +174,11 @@ public class ShyExcel {
         }
         if($column.merge()){
             column.setMerge(true);
-        }
-        if($column.collection()){
+            column.setCollection(false);
+        }else if($column.collection()){
+            column.setCollection(true);
             column.setColumns(toColumns(AnnotationUtil.findFieldType(field,0)));
-            column.setMerge(null);
+            column.setMerge(false);
             column.setType(null);
         }
         return column;
