@@ -16,7 +16,7 @@ public @interface Sheet {
     Header header() default @Header;
     boolean active() default false;
 
-    boolean visible() default false;
+    boolean visible() default true;
 
     Page page() default @Page;
 

@@ -14,6 +14,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Stream;
 import java.util.zip.GZIPOutputStream;
 
@@ -169,6 +170,7 @@ public class ShyExcel {
         column.setTitle($column.title());
         column.setType($column.type());
         column.setFont(toFont($column.font()));
+        column.setStyle(toStyle($column.style()));
         if($column.width() >= 0f){
             column.setWidth($column.width());
         }
@@ -183,6 +185,65 @@ public class ShyExcel {
         }
         return column;
     }
+    private static Style toStyle(io.github.buzzxu.shyexcel.annotation.Style $style){
+        if(AnnotationUtil.isDefaultValues($style)){
+            return null;
+        }
+        Style style = new Style();
+        Border[] borders = toBorders($style.border());
+        if(borders != null && borders.length > 0){
+            style.setBorder(borders);
+        }
+        style.setFont(toFont($style.font()));
+        style.setFill(toFill($style.fill()));
+        style.setAlignment(toAlignment($style.alignment()));
+        return style;
+    }
+
+    private static Border[] toBorders(io.github.buzzxu.shyexcel.annotation.Style.Border[] borders){
+        if(borders == null || borders.length == 0){
+            return null;
+        }
+        return Stream.of(borders).map(ShyExcel::toBorder).filter(Objects::nonNull).toArray(Border[]::new);
+    }
+    private static Border toBorder(io.github.buzzxu.shyexcel.annotation.Style.Border $border){
+        if(AnnotationUtil.isDefaultValues($border)){
+            return null;
+        }
+        Border border = new Border();
+        if (!Strings.isNullOrEmpty($border.type())){
+            border.setType($border.type());
+        }
+        if (!Strings.isNullOrEmpty($border.color())){
+            border.setType($border.color().strip());
+        }
+        if($border.style() > 0){
+            border.setStyle($border.style());
+        }
+        return border;
+    }
+    private static Fill toFill(io.github.buzzxu.shyexcel.annotation.Style.Fill $fill){
+        if(AnnotationUtil.isDefaultValues($fill)){
+            return null;
+        }
+        Fill fill = new Fill();
+        if(!Strings.isNullOrEmpty($fill.type())){
+            fill.setType($fill.type().strip());
+        }
+        if(!Strings.isNullOrEmpty($fill.pattern())){
+            fill.setPattern($fill.pattern());
+        }
+        if(!Strings.isNullOrEmpty($fill.color())){
+            fill.setColor($fill.color().split(","));
+        }
+        if($fill.shading() > 0){
+            fill.setShading($fill.shading());
+        }
+        if($fill.style() > 0){
+            fill.setStyle($fill.style());
+        }
+        return fill;
+    }
     private static Font toFont(io.github.buzzxu.shyexcel.annotation.Font $font){
         if(AnnotationUtil.isDefaultValues($font)){
             return null;
@@ -195,13 +256,13 @@ public class ShyExcel {
             font.setItalic(true);
         }
         if(!Strings.isNullOrEmpty($font.underline())){
-            font.setUnderline($font.underline());
+            font.setUnderline($font.underline().strip());
         }
         if(!Strings.isNullOrEmpty($font.family())){
-            font.setFamily($font.family());
+            font.setFamily($font.family().strip());
         }
         if(!Strings.isNullOrEmpty($font.vertAlign())){
-            font.setVertAlign($font.vertAlign());
+            font.setVertAlign($font.vertAlign().strip());
         }
         if($font.size() > 0f){
             font.setSize($font.size());
@@ -210,7 +271,7 @@ public class ShyExcel {
             font.setStrike(true);
         }
         if(!Strings.isNullOrEmpty($font.color())){
-            font.setColor($font.color());
+            font.setColor($font.color().strip());
         }
         if($font.colorIndexed() > 0){
             font.setColorIndexed($font.colorIndexed());
@@ -222,6 +283,35 @@ public class ShyExcel {
             font.setColorTint($font.colorTint());
         }
         return font;
+    }
+
+    private static Alignment toAlignment(io.github.buzzxu.shyexcel.annotation.Alignment $alignment){
+        if(AnnotationUtil.isDefaultValues($alignment)){
+            return null;
+        }
+        Alignment alignment = new Alignment();
+        if($alignment.wrap()){
+            alignment.setWrap(true);
+        }
+        if(!Strings.isNullOrEmpty($alignment.vertical())){
+            alignment.setVertical($alignment.vertical().strip());
+        }
+        if(!Strings.isNullOrEmpty($alignment.horizontal())){
+            alignment.setHorizontal($alignment.horizontal().strip());
+       }
+        if($alignment.indent() > 0){
+            alignment.setIndent($alignment.indent());
+        }
+        if($alignment.rotation() > 0){
+            alignment.setRotation($alignment.rotation());
+        }
+        if($alignment.justifyLastLine()){
+            alignment.setJustifyLastLine(true);
+        }
+        if($alignment.shrinkToFit()){
+            alignment.setShrinkToFit(true);
+        }
+        return alignment;
     }
 
 

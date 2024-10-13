@@ -16,6 +16,7 @@ public @interface Style {
     Border[] border() default {};
     Font font() default @Font;
     Fill fill() default @Fill;
+    Alignment alignment() default @Alignment;
 
     @Retention(RetentionPolicy.RUNTIME)
     @Target(ElementType.ANNOTATION_TYPE)
@@ -31,6 +32,9 @@ public @interface Style {
         String type() default "";
         String pattern() default "";
         String color() default "";
+        int shading()default 0;
         int style() default 0;
     }
+
+
 }

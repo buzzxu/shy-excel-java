@@ -23,7 +23,15 @@ public @interface ExcelCol {
 
     Font font() default @Font;
 
+    Style style() default @Style;
+
     float width() default 0f;
 
     boolean collection() default false;
+
+    /**
+     * 自动换行
+     * @return
+     */
+    boolean wrap() default false;
 }

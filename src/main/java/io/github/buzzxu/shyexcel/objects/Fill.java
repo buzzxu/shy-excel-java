@@ -16,4 +16,5 @@ public class Fill {
     private String pattern;
     private String[] color;
     private Integer shading;
+    private Integer style;
 }

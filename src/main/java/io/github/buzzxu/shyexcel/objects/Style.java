@@ -15,4 +15,5 @@ public class Style {
     private Border[] border;
     private Font font;
     private Fill fill;
+    private Alignment alignment;
 }

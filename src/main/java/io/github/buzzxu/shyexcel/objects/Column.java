@@ -18,6 +18,7 @@ public class Column {
     private Boolean merge;
     private Font font;
     private Float width;
+    private Style style;
     private boolean collection;
     private Column[] columns;
 }
