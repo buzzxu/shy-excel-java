@@ -5,7 +5,7 @@ import lombok.Setter;
 
 /**
  * @author xux
- * @date 2024年10月13日 18:35:58
+ * 2024年10月13日 18:35:58
  */
 @Getter @Setter
 public class Alignment {
